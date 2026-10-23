@@ -21,6 +21,8 @@ jobs:
           pip install pytest httpx
 
       - name: Lancer les tests
+        env:
+          DATABASE_URL: postgresql+psycopg://test:test@localhost:5432/test
         run: pytest
 
   build-and-push:
