@@ -22,6 +22,22 @@ jobs:
           --health-interval 5s
           --health-timeout 5s
           --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Installer les dépendances
+        run: |
+          pip install -r requirements.txt
+          pip install pytest httpx
+
+      - name: Lancer les tests
+        env:
+          DATABASE_URL: postgresql+psycopg://test:test@localhost:5432/test
+        run: pytest
 
   build-and-push:
     needs: test
@@ -45,3 +61,4 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/dataanalyzer-backend:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          
