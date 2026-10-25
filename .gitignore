@@ -1,2 +1,27 @@
+# Environnement virtuel
 venv/
+.venv/
+
+# Secrets
 .env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Fichiers générés par l'application
+uploads/
+chroma_db/
+mlruns/
+*.pkl
+*.joblib
+*.log
+
+# IDE et système
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
